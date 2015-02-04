@@ -197,7 +197,9 @@ Template.detailDocumentTemplate.helpers({
         }
         // content += "</table>";
 
-        insertTextHighlights(meta.textHighlights, content[0]);
+        if (meta && meta.textHighlights) {
+          insertTextHighlights(meta.textHighlights, content[0]);
+        }
         // insertTextHighlights(that._id, content[0]);
 
         Session.set('content', content[0].outerHTML);
@@ -226,7 +228,9 @@ Template.detailDocumentTemplate.helpers({
       //we create a temporary element that we can walk over and find text nodes
       var tempContent = $("<div />").html(content);
 
-      insertTextHighlights(meta.textHighlights, tempContent[0]);
+      if (meta && meta.textHighlights) {
+        insertTextHighlights(meta.textHighlights, tempContent[0]);
+      }
 
       //PREVIEW SNIPPET
       var snippet = Session.get('detailDocumentPreviewSnippet');
@@ -635,8 +639,8 @@ var attachEvents = function() {
   $("#comment").off("keyup");
   $("#comment").on("keyup", timedSaveComment);
 
-  $("#shareButton").off('touchend');
-  $("#shareButton").on('touchend', openShareView);
+  $("#shareButton").off('click touchend');
+  $("#shareButton").on('click touchend', openShareView);
 };
 
 var showSharePopup = function(el, source) {

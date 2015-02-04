@@ -136,12 +136,12 @@ if (Meteor.isClient) {
 
   Template.searchIndex.rendered = function() {
     this.autorun(function() {
-    var page = Session.get('lastQueryPage');
-    reflectURL();
+      var page = Session.get('lastQueryPage');
+      reflectURL();
 
-    $("body").on("mouseup", function(e) {
-      Session.set('querySuggestions', []);
-    });
+      $("body").on("mouseup", function(e) {
+        Session.set('querySuggestions', []);
+      });
   });
   };
 
